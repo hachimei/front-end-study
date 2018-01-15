@@ -1,0 +1,9 @@
+#main {
+    color:#00ffee;
+    a{
+        font-weight:bold;
+        &:hover{
+            color:#f00;
+        }
+    }
+}

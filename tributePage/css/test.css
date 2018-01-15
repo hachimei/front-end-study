@@ -1,0 +1,6 @@
+#main {
+  color: #00ffee; }
+  #main a {
+    font-weight: bold; }
+    #main a:hover {
+      color: #f00; }
