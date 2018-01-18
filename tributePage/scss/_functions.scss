@@ -1,0 +1,28 @@
+// Table of Contents
+//
+// Colors
+// Options
+// Spacing
+// Body
+// Links
+// Grid breakpoints
+// Grid containers
+// Grid columns
+// Fonts
+// Components
+
+@mixin _assert-ascending($map, $map-name) {
+    $prev-key: null;
+    $prev-num: null;
+    @each $key, $num in $map {
+      @if $prev-num == null {
+        // Do nothing
+      } @else if not comparable($prev-num, $num) {
+        @error "请确保#{$map-name}的值是数字!";
+      } @else if $prev-num >= $num {
+        @error "请确保#{$map-name}的值（值为数字）是按从小到大的顺序排列！";
+      }
+      $prev-key: $key;
+      $prev-num: $num;
+    }
+  }
