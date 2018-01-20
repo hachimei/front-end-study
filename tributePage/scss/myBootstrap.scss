@@ -1,7 +1,121 @@
 @import "functions";
 @import "variables";
-@import "mixin";
+@import "root";
+@import "mixins/breakpoints.scss";
 //@import "grid"; //栅栏布局，bootstrap通过after和before强制所有元素的box-sizing取值border-content,即将所有元素看成一个盒子，
-                    //而且这个盒子的width和height包括了border和padding再加上content-box。这样让页面元素的大小符合我们的预期。
+//而且这个盒子的width和height包括了border和padding再加上content-box。这样让页面元素的大小符合我们的预期。
 //@import "utilities/flex";
 //@import "jumbtron";
+
+html {
+    box-sizing: border-box;
+    -ms-overflow-style: scrollbar;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
+
+@mixin make-container() {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: ($grid-gutter-width / 2);
+    padding-right: ($grid-gutter-width / 2);
+}
+
+@mixin make-container-max-widths($max-widths:$container-max-widths, $breakpoints:$grid-breakpoints){
+    @each $breakpoint,
+    $container-max-width in $max-widths{
+        @include media-breakpoint-up($breakpoint, $breakpoints){
+            max-width: $container-max-width;
+        }
+    }
+}
+
+.container {
+    @include make-container();
+    @include make-container-max-widths();
+}
+
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+    text-decoration: none;
+}
+
+.nav-link {
+    display:  block;
+    padding: $nav-link-padding-y $nav-link-padding-x;
+    &:hover,
+    &:focus {
+        text-decoration: none;
+
+    }
+    &.disable {
+        color: $nav-link-disabled-color;
+    }
+}
+
+.nav-pills .nav-link {
+    border-radius: 0.25rem;
+  }
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+position: absolute;
+top: 100%;
+left: 0;
+z-index: 1000;
+display: none;
+float: left;
+min-width: 10rem;
+padding: 0.5rem 0;
+margin: 0.125rem 0 0;
+font-size: 1rem;
+color: #212529;
+text-align: left;
+list-style: none;
+background-color: #fff;
+background-clip: padding-box;
+border: 1px solid rgba(0, 0, 0, 0.15);
+border-radius: 0.25rem;
+}
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 0.25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+  }
+
+.dropdown-item:focus, .dropdown-item:hover {
+color: #16181b;
+text-decoration: none;
+background-color: #f8f9fa;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+color: #fff;
+text-decoration: none;
+background-color: #007bff;
+}
+
+.dropdown-item.disabled, .dropdown-item:disabled {
+color: #868e96;
+background-color: transparent;
+}
