@@ -1,7 +1,8 @@
 @import "functions";
 @import "variables";
 @import "root";
-@import "mixins/breakpoints.scss";
+@import "mixins";
+@import "buttons";
 //@import "grid"; //栅栏布局，bootstrap通过after和before强制所有元素的box-sizing取值border-content,即将所有元素看成一个盒子，
 //而且这个盒子的width和height包括了border和padding再加上content-box。这样让页面元素的大小符合我们的预期。
 //@import "utilities/flex";
@@ -17,6 +18,10 @@ html {
   *::after {
     box-sizing: inherit;
   }
+
+header {
+    background-color: #722872;
+}
 
 @mixin make-container() {
     width: 100%;
@@ -34,6 +39,13 @@ html {
         }
     }
 }
+
+@mixin caret-down {
+    border-top: $caret-width solid;
+    border-right: $caret-width solid transparent;
+    border-bottom: 0;
+    border-left: $caret-width solid transparent;
+  }
 
 .container {
     @include make-container();
@@ -69,6 +81,11 @@ html {
 .dropdown {
     position: relative;
 }
+
+.dropdown-toggle {
+    // Generate the caret automatically
+    @include caret-down;
+  }
 
 .dropdown-menu {
 position: absolute;
@@ -119,3 +136,7 @@ background-color: #007bff;
 color: #868e96;
 background-color: transparent;
 }
+
+.dropdown-menu.show {
+    display: block;
+  }
